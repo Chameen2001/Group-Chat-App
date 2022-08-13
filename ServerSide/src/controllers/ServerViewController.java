@@ -38,7 +38,7 @@ public class ServerViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            server = new Server(new ServerSocket(5000));
+            server = new Server(new ServerSocket(2001));
         }catch (IOException e){
             e.printStackTrace();
             System.out.println("Error creating server");

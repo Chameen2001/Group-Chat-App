@@ -16,6 +16,7 @@ public class ClientInitializer extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setScene
                 (new Scene(FXMLLoader.load(getClass().getResource("../client1/views/ClientView.fxml"))));
+        primaryStage.setTitle("Client");
         primaryStage.show();
     }
 }
