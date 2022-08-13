@@ -51,6 +51,7 @@ public class ServerViewController implements Initializable {
             }
         });
 
+
         server.receiveMessageFromClient(vBox_messages);
 
     }
@@ -80,6 +81,12 @@ public class ServerViewController implements Initializable {
     };
 
     public static void addLabel(String messageFromClient,VBox vBox){
+        System.out.println("ssss"+messageFromClient);
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setPadding(new Insets(5,5,5,10));
@@ -90,9 +97,12 @@ public class ServerViewController implements Initializable {
         textFlow.setPadding(new Insets(5,10,5,10));
         hBox.getChildren().add(textFlow);
 
+//        vBox.getChildren().add(hBox); this method called by another thread instead jfx thread so We Can not insert anything without jfx thread
+
         Platform.runLater(() -> {
             vBox.getChildren().add(hBox);
         });
+        System.out.println("awada methana");
     }
 
 

@@ -13,9 +13,10 @@ public class Server{
     private BufferedWriter bufferedWriter;
 
     public Server (ServerSocket serverSocket){
+
         try {
             this.serverSocket=serverSocket;
-            this.socket=serverSocket.accept();
+            this.socket=serverSocket.accept(); //jvm will stop here and result will be no server interface execution;
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         }catch (IOException e){
@@ -24,7 +25,7 @@ public class Server{
             closeEverything(socket,bufferedWriter,bufferedReader);
 
         }
-
+        System.out.println("here");
     }
     public void sendMessageToClient(String messageToClient){
         try {
@@ -39,9 +40,24 @@ public class Server{
     }
 
     public void receiveMessageFromClient(VBox vBox){
+        /*System.out.println("karakenoooooooo");
+        while (socket.isConnected()){
+            System.out.println("Connectod");
+            try {
+                System.out.println("first ss");
+                String massageFromClient = bufferedReader.readLine();
+                ServerViewController.addLabel(massageFromClient,vBox);
+            }catch (IOException e){
+                e.printStackTrace();
+                System.out.println("Error receiving message from client");
+                closeEverything(socket,bufferedWriter,bufferedReader);
+                break;
+            }
+        }*/
+
         new Thread(new Runnable() {
-            @Override
-            public void run() {
+           @Override
+             public void run() {
                 while (socket.isConnected()){
                     try {
                         String massageFromClient = bufferedReader.readLine();
