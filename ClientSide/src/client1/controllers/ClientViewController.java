@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,26 +30,15 @@ public class ClientViewController implements Initializable {
     public TextField txtMessage;
     public ScrollPane sp_main;
     public VBox vBox_messages;
+    public AnchorPane mainAnchorPane;
+    public AnchorPane childrenAnchorPane;
+    public String clientName;
 
     private Client client;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            client=new Client(new Socket("localhost",2001));
-            System.out.println("Connected to server");
-        }catch (IOException e){
-            e.printStackTrace();
-        }
 
-        vBox_messages.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                sp_main.setVvalue((Double)newValue);
-            }
-        });
-
-        client.receiveMessageFromServer(vBox_messages);
     }
 
     public void btnSendOnAction(ActionEvent actionEvent) {
@@ -68,13 +58,13 @@ public class ClientViewController implements Initializable {
             hBox.getChildren().add(textFlow);
             vBox_messages.getChildren().add(hBox);
 
-            client.sendMessageToServer(messageToSend);
+            client.sendMessageToClientHandler(messageToSend);
             txtMessage.clear();
 
         }
     };
 
-    public static void addLabel(String messageFromServer,VBox vBox){
+    public void addLabel(String messageFromServer,VBox vBox){
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setPadding(new Insets(5,5,5,10));
@@ -88,6 +78,26 @@ public class ClientViewController implements Initializable {
         Platform.runLater(() -> {
             vBox.getChildren().add(hBox);
         });
+    }
+
+    public void setUserName(String text) {
+        this.clientName=text;
+        try {
+            client=new Client(new Socket("localhost",2001),this,clientName);
+            System.out.println("Connected to server");
+        }catch (IOException e){
+            System.out.println("Can notttttttttt");
+            e.printStackTrace();
+        }
+
+        vBox_messages.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                sp_main.setVvalue((Double)newValue);
+            }
+        });
+
+        client.receiveMessageFromClientHandler(vBox_messages);
     }
 
 

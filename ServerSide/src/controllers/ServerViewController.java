@@ -1,3 +1,4 @@
+/*
 package controllers;
 
 import javafx.application.Platform;
@@ -50,9 +51,6 @@ public class ServerViewController implements Initializable {
                 sp_main.setVvalue((Double) newValue);
             }
         });
-
-
-        server.receiveMessageFromClient(vBox_messages);
 
     }
 
@@ -120,7 +118,8 @@ public class ServerViewController implements Initializable {
 
 
 
-   /* public TextArea txtServerMsgArea;
+   */
+/* public TextArea txtServerMsgArea;
     public TextField txtServerMsgTypeField;
     ServerSocket serverSocket=null;
     Socket socket=null;
@@ -136,7 +135,11 @@ public class ServerViewController implements Initializable {
                 BufferedReader bufferedReader= new BufferedReader(inputStreamReader);
                 String record= bufferedReader.readLine();
                 System.out.println(record);
-                *//* while(true){if(!message.equals("exit"))}*//*
+                *//*
+*/
+/* while(true){if(!message.equals("exit"))}*//*
+*/
+/*
 
                 while (!record.equals("exit")){
                     txtServerMsgArea.appendText(record);
@@ -153,5 +156,7 @@ public class ServerViewController implements Initializable {
         printWriter.println(txtServerMsgTypeField.getText());
         txtServerMsgTypeField.clear();
         printWriter.flush();
-    }*/
+    }*//*
+
 }
+*/

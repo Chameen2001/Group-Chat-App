@@ -9,12 +9,19 @@ public class Client {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private ClientViewController clientViewController;
+    private String userName;
 
-    public Client(Socket socket){
+    public Client(Socket socket, ClientViewController clientViewController,String userName){
         try {
             this.socket=socket;
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.clientViewController=clientViewController;
+            this.userName=userName;
+            bufferedWriter.write(userName);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
         }catch (IOException e){
             System.out.println("Error creating client");
             e.printStackTrace();
@@ -23,9 +30,10 @@ public class Client {
 
     }
 
-    public void sendMessageToServer(String messageToServer){
+    public void sendMessageToClientHandler(String messageToServer){
         try {
-            bufferedWriter.write(messageToServer);
+            System.out.println("group test : "+messageToServer);
+            bufferedWriter.write(userName+": "+messageToServer);
             bufferedWriter.newLine();
             bufferedWriter.flush();
         }catch (IOException e){
@@ -35,14 +43,14 @@ public class Client {
         }
     }
 
-    public void receiveMessageFromServer(VBox vBox){
+    public void receiveMessageFromClientHandler(VBox vBox){
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (socket.isConnected()){
                     try {
                         String massageFromServer = bufferedReader.readLine();
-                        ClientViewController.addLabel(massageFromServer,vBox);
+                        clientViewController.addLabel(massageFromServer,vBox);
                     }catch (IOException e){
                         e.printStackTrace();
                         System.out.println("Error receiving message from client");
