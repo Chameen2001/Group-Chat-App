@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="childrenAnchorPane" prefHeight="588.0" prefWidth="484.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client1.controllers.ClientViewController">
+<AnchorPane fx:id="childrenAnchorPane" prefHeight="588.0" prefWidth="484.0" styleClass="firstAnchorPane" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client1.controllers.ClientViewController">
    <children>
-      <Label layoutX="192.0" layoutY="21.0" prefHeight="34.0" prefWidth="100.0" text="Howdy">
+      <Label layoutX="30.0" layoutY="22.0" prefHeight="35.0" prefWidth="100.0" text="Howdies">
          <font>
-            <Font size="27.0" />
+            <Font name="Barlow Semi Condensed Bold" size="27.0" />
          </font>
       </Label>
-      <Separator layoutX="27.0" layoutY="65.0" prefHeight="4.0" prefWidth="426.0" />
-      <TextField fx:id="txtMessage" layoutX="27.0" layoutY="535.0" prefHeight="26.0" prefWidth="351.0" />
-      <Button layoutX="393.0" layoutY="535.0" mnemonicParsing="false" onAction="#btnSendOnAction" prefHeight="26.0" prefWidth="60.0" text="Send" />
-      <ScrollPane fx:id="sp_main" layoutX="27.0" layoutY="77.0" prefHeight="431.0" prefWidth="426.0">
-         <content>
-            <VBox fx:id="vBox_messages" prefHeight="423.0" prefWidth="408.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </VBox>
-         </content>
-      </ScrollPane>
+      <AnchorPane layoutX="27.0" layoutY="77.0" prefHeight="521.0" prefWidth="484.0" styleClass="secondAnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ScrollPane fx:id="sp_main" layoutX="29.0" prefHeight="408.0" prefWidth="446.0" styleClass="scroll-pane1" AnchorPane.bottomAnchor="73.0">
+               <content>
+                  <VBox fx:id="vBox_messages" prefHeight="403.0" prefWidth="424.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <TextField fx:id="txtMessage" layoutX="29.0" layoutY="465.0" prefHeight="42.0" prefWidth="426.0" promptText="Type your text message here..." styleClass="txtMessageField" />
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="375.0" layoutY="473.0" onMouseClicked="#btnImageOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/img/icons8-clip-64.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="414.0" layoutY="469.0" onMouseClicked="#btnSendOnClick" prefHeight="40.0" prefWidth="28.0">
+               <children>
+                  <Circle fill="DODGERBLUE" layoutX="22.0" layoutY="22.0" radius="17.5" stroke="BLACK" strokeType="INSIDE" styleClass="btnSend" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="3.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/img/icons8-email-send-30.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

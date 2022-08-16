@@ -1,0 +1,36 @@
+.howdy {
+    -fx-font-family: Barlow Semi Condensed;
+}
+
+.txtMessageField {
+    -fx-border-color: transparent;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.scroll-pane1 {
+
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.secondAnchorPane {
+
+    -fx-background-color: #deebfd;
+    -fx-background-radius: 20px 20px 0 0;
+}
+
+.firstAnchorPane{
+    -fx-background-color: white;
+}
+
+.btnSend{
+    -fx-background-radius: 100%;
+    -fx-stroke: transparent;
+
+}

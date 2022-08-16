@@ -10,19 +10,23 @@ public class ClientHandler implements Runnable{
     private BufferedWriter bufferedWriter;
     private BufferedReader bufferedReader;
     private String clientUserName;
+    private BufferedInputStream bufferedInputStream;
 
     public ClientHandler(Socket socket){
         try {
             this.socket=socket;
             this.bufferedReader=new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            this.clientUserName=bufferedReader.readLine();
+            this.clientUserName= this.bufferedReader.readLine();
+            /*Thread thread = new Thread(new ClientImageHandler(socket,clientUserName));
+            thread.start();
+            this.bufferedInputStream=new BufferedInputStream(socket.getInputStream());*/
             System.out.println("Const name : "+this.clientUserName);
             clientHandlers.add(this);
             broadcastMessage("SERVER: "+clientUserName+" has entered the chat!");
         }catch (IOException e){
             e.printStackTrace();
-            closeEverything(socket,bufferedWriter,bufferedReader);
+            closeEverything(socket, this.bufferedWriter, this.bufferedReader);
         }
     }
 
@@ -35,10 +39,10 @@ public class ClientHandler implements Runnable{
             try {
                 messageFromClient   = bufferedReader.readLine();
                 System.out.println(clientUserName+" :: "+messageFromClient);
+                System.out.println("message from client is: "+messageFromClient);
                 broadcastMessage(messageFromClient);
-            }catch (IOException e){
+            }catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Error receiving message from client");
                 closeEverything(socket,bufferedWriter,bufferedReader);
                 break;
             }
@@ -47,7 +51,6 @@ public class ClientHandler implements Runnable{
     }
 
     private void broadcastMessage(String messageFromClient) {
-        if (messageFromClient==null)return;
         for (ClientHandler clientHandler : clientHandlers){
             try {
                 System.out.println(clientHandler.clientUserName+" != "+clientUserName);
